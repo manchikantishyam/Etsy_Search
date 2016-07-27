@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Etsy_Search</string>
+    <string name="esty_url_static_part">https://api.etsy.com/v2/listings/active</string>
+    <string name="etsy_url_main_image">MainImage</string>
+    <string name="hint_search">Search Here</string>
+    <string name="etsy_api_key" templateMergeStrategy="preserve" translatable="false">liwecjs0c3ssk6let4p1wqt9</string>
+    <string name="search_list_fragment_tag" templateMergeStrategy="preserve" translatable="false">searchListFragmentTag</string>
+
+</resources>
