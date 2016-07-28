@@ -16,7 +16,7 @@
     <ProgressBar
         android:id="@+id/progress_spinner"
         android:layout_below="@+id/search_list_fragment"
-        android:style="@style/Spinner"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"

@@ -105,14 +105,7 @@ public class EtsySearchDataContentProvider extends ContentProvider{
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         switch (sUriMatcher.match(uri)) {
             case SEARCHDATA: {
-                String mSearchKeyWords = selectionArgs[0];
-                String mSearchPage = selectionArgs[1];
                 cursor = db.query(SearchDataTable.TABLE_NAME, projection, selection, null, sortOrder, null, null);
-                SearchEstyListingsApiAction action = new SearchEstyListingsApiAction(getContext());
-                action.setSearchKeyWords(mSearchKeyWords);
-                action.setSearchPage(mSearchPage);
-                Intent intent = EstySearchIntentService.getApiActionIntent(getContext(), action);
-                getContext().startService(intent);
                 break;
             }
         }

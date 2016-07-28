@@ -10,6 +10,8 @@ public class ApiError implements Parcelable{
 
     public static final int DEF_ERROR_CODE = -1;
 
+    public static final int NO_RESULTS_ERROR_CODE = 0;
+
     private String mErrorMessage;
 
     public ApiError(){

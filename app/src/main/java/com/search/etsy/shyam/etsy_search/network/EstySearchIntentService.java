@@ -54,8 +54,10 @@ public class EstySearchIntentService extends IntentService {
                 resultIntent.putExtra(PARAM_RESULT_CODE, apiAction.getResultCode());
                 if (apiAction.getResultCode() == HttpURLConnection.HTTP_OK) {
                     resultIntent.putExtra(PARAM_RESULT_ENTITY, apiAction.getResultEntity());
+                    resultIntent.putExtra(PARAM_RESULT_CODE, apiAction.getResultCode());
                 } else {
                     resultIntent.putExtra(PARAM_RESULT_ENTITY, apiAction.getError());
+                    resultIntent.putExtra(PARAM_RESULT_CODE, apiAction.getResultCode());
                 }
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(resultIntent);
             }

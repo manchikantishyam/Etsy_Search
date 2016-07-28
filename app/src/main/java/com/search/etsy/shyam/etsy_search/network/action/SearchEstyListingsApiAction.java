@@ -64,6 +64,7 @@ public class SearchEstyListingsApiAction extends BaseApiAction<ListOfSearchData>
     public void doNetworkOperation() throws IOException {
         addQueryParam(QUERY_PARAM_SEARCH_KEY, mSearchKeyWords);
         addQueryParam(QUERY_PARAM_SEARCH_PAGE, mSearchPage);
+        Log.v("Loading Counts: ", "Requested Page " + mSearchPage);
 
         super.doNetworkOperation();
     }
@@ -104,6 +105,10 @@ public class SearchEstyListingsApiAction extends BaseApiAction<ListOfSearchData>
                             context.getContentResolver().delete(EtsySearchDataContentProvider.CONTENT_URI, null, null);
                         int insertCount = context.getContentResolver().bulkInsert(EtsySearchDataContentProvider.CONTENT_URI, contentValuesArray);
                         Log.d(TAG, "inserted: " + insertCount);
+                        Log.v("Loading Counts: ", "Page "+mSearchPage+ " inserted rows "+insertCount);
+                    }else{
+                        setResultCode(ApiError.NO_RESULTS_ERROR_CODE);
+                        setOperationResult("No Results");
                     }
                 }
             }

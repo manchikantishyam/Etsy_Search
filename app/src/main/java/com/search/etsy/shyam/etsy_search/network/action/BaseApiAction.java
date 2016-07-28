@@ -107,6 +107,7 @@ public abstract class BaseApiAction<E extends Parcelable> implements Parcelable 
         }
         mOperationResult = getStringFromStream(is);
         print(TAG, mOperationResult);
+        Log.v("Loading Counts: ","New operation result fetched ");
     }
 
 
