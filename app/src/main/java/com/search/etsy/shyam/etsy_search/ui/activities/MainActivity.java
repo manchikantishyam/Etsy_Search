@@ -1,6 +1,7 @@
 package com.search.etsy.shyam.etsy_search.ui.activities;
 
 import android.app.SearchManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.ProgressBar;
 
 import com.search.etsy.shyam.etsy_search.R;
+import com.search.etsy.shyam.etsy_search.db.EtsySearchDataContentProvider;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     public static final String PARAM_NEW_SEARCH = "PARAM_NEW_SEARCH";
@@ -51,9 +53,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             //Passing search query obtained from search view to SearchListFragment through Broadcast
             String searchQuery = intent.getStringExtra(SearchManager.QUERY);
-            Intent mIntent = new Intent(ACTION_NEW_SEARCH);
-            mIntent.putExtra(PARAM_NEW_SEARCH, searchQuery);
-            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(mIntent);
+            if(searchQuery.length()>0) {
+                Intent mIntent = new Intent(ACTION_NEW_SEARCH);
+                mIntent.putExtra(PARAM_NEW_SEARCH, searchQuery);
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(mIntent);
+                ContentValues values = new ContentValues();
+                values.put(EtsySearchDataContentProvider.RecentSearchDataTable.COLUMN_SEARCH_KEY, searchQuery);
+                getContentResolver().insert(EtsySearchDataContentProvider.CONTENT_RECENT_URI, values);
+            }
+
         }
     }
     @Override

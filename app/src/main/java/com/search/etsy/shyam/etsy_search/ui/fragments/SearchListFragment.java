@@ -14,7 +14,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +83,7 @@ public class SearchListFragment extends Fragment implements LoaderManager.Loader
                     mSearchKeyWord = mBundle.getString(MainActivity.PARAM_NEW_SEARCH);
                 mSearchPage = MainActivity.INITIAL_PAGE_NUMBER;//Since new search requesting for 1st page result
                 isNewSearch = true;
-                getActivity().getContentResolver().delete(EtsySearchDataContentProvider.CONTENT_URI, null, null);
+                getActivity().getContentResolver().delete(EtsySearchDataContentProvider.CONTENT_SEARCH_URI, null, null);
                 requestResultsFromAPI();
             }
         }
@@ -180,7 +179,7 @@ public class SearchListFragment extends Fragment implements LoaderManager.Loader
         switch (id) {
             case SEARCH_LISTINGS_LOADER_ID: {
                 loader = new CursorLoader(getContext(),
-                        EtsySearchDataContentProvider.CONTENT_URI,
+                        EtsySearchDataContentProvider.CONTENT_SEARCH_URI,
                         new String[]{
                                 EtsySearchDataContentProvider.SearchDataTable._ID,
                                 EtsySearchDataContentProvider.SearchDataTable.COLUMN_TITLE,

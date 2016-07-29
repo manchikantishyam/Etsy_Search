@@ -85,8 +85,8 @@ public class SearchEstyListingsApiAction extends BaseApiAction {
                             contentValuesArray[i] = value;
                         }
                         if (mSearchPage.equals(String.valueOf(MainActivity.INITIAL_PAGE_NUMBER))) //deleting the old results from database in case of new search
-                            context.getContentResolver().delete(EtsySearchDataContentProvider.CONTENT_URI, null, null);
-                        int insertCount = context.getContentResolver().bulkInsert(EtsySearchDataContentProvider.CONTENT_URI, contentValuesArray);
+                            context.getContentResolver().delete(EtsySearchDataContentProvider.CONTENT_SEARCH_URI, null, null);
+                        int insertCount = context.getContentResolver().bulkInsert(EtsySearchDataContentProvider.CONTENT_SEARCH_URI, contentValuesArray);
                         Log.d(TAG, "inserted: " + insertCount);
                     }else{
                         setResultCode(ApiError.NO_RESULTS_ERROR_CODE);

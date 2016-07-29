@@ -1,4 +1,11 @@
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
     android:hint="@string/hint_search"
     android:label="@string/app_name"
-    android:voiceSearchMode="showVoiceSearchButton|launchRecognizer" />
+    android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+    android:searchSuggestAuthority="com.searchetsy.data"
+    android:searchSuggestIntentAction="android.intent.action.VIEW"
+    android:searchSuggestIntentData="content://com.searchetsy.data/EtsyRecentSearchDataTable"
+    android:searchSuggestSelection=" ?"
+    android:searchSuggestThreshold="1"
+    android:includeInGlobalSearch="true"
+    />
