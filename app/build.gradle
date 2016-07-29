@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.search.etsy.shyam.etsy_search"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.squareup.picasso:picasso:2.3.3'
     compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'it.sephiroth.android.library.targettooltip:target-tooltip-library:+'
 }

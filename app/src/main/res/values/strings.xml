@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Etsy_Search</string>
+    <string name="app_name">Etsy Search</string>
     <string name="esty_url_static_part">https://api.etsy.com/v2/listings/active</string>
     <string name="etsy_url_main_image">MainImage</string>
     <string name="hint_search">Search Here</string>
@@ -8,5 +8,4 @@
     <string name="error_no_internet">Please Check Your Network Connection</string>
     <string name="error_connection">Connection Error Please Try Again</string>
     <string name="search_list_fragment_tag" templateMergeStrategy="preserve" translatable="false">searchListFragmentTag</string>
-
 </resources>

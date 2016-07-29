@@ -52,7 +52,6 @@ public class SearchListFragment extends Fragment implements LoaderManager.Loader
     LinearLayoutManager mLayoutManager;
     int mPastVisiblesItems, mVisibleItemCount, mTotalItemCount;
 
-
     private BroadcastReceiver mLocalBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

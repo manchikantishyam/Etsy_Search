@@ -4,39 +4,37 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="7dp"
-    android:layout_marginTop="7dp"
-    android:layout_marginRight="7dp">
+    android:layout_marginLeft="@dimen/card_inside_margin"
+    android:layout_marginTop="@dimen/card_inside_margin"
+    android:layout_marginRight="@dimen/card_inside_margin">
     <android.support.v7.widget.CardView
         android:id="@+id/search_item_card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="3dp">
+        card_view:cardCornerRadius="@dimen/general_card_corner_radius">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/general_horizontal_margin"
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/item_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/item_image"
                 android:layout_alignParentLeft="true"
-                android:layout_marginRight="16dp"
-                android:src="@mipmap/ic_launcher"
+                android:layout_marginRight="@dimen/general_horizontal_margin"
                 android:layout_centerVertical="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/item_title"
-                android:text="title"
                 android:layout_toRightOf="@+id/item_image"
                 android:layout_alignParentTop="true"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_large" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,11 +42,9 @@
                 android:id="@+id/item_price"
                 android:layout_toRightOf="@+id/item_image"
                 android:layout_below="@+id/item_title"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_size_medium"
                 />
 
         </RelativeLayout>
-
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

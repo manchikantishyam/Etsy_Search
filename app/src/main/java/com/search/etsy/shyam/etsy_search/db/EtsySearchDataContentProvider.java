@@ -47,7 +47,7 @@ public class EtsySearchDataContentProvider extends ContentProvider {
                     + SearchDataTable.COLUMN_TITLE + " TEXT NOT NULL, "
                     + SearchDataTable.COLUMN_IMAGE_URL + " TEXT NOT NULL, "
                     + SearchDataTable.COLUMN_PRICE + " REAL, "
-                    + SearchDataTable.COLUMN_CURRENCY + " TEXT)";
+                    + SearchDataTable.COLUMN_CURRENCY + " TEXT NOT NULL)";
 
 
     private static final UriMatcher sUriMatcher;
