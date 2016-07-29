@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'ETSY_API_KEY', '"ob5cp17p7q8hvw37wv4nopuf"'
+    }
 }
 
 dependencies {

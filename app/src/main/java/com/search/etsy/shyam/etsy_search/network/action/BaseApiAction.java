@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.search.etsy.shyam.etsy_search.BuildConfig;
 import com.search.etsy.shyam.etsy_search.R;
 import com.search.etsy.shyam.etsy_search.model.ApiError;
 
@@ -25,7 +26,7 @@ import java.util.Set;
 /**
  * Created by Shyam on 7/17/16.
  */
-public abstract class BaseApiAction<E extends Parcelable> implements Parcelable {
+public abstract class BaseApiAction implements Parcelable {
     private static final String TAG = BaseApiAction.class.getSimpleName();
 
     private static final String PRINT_PATTERN = "%s(%d/%d):%s";
@@ -53,7 +54,7 @@ public abstract class BaseApiAction<E extends Parcelable> implements Parcelable 
     public BaseApiAction(Context context) {
         this();
         this.mUrl = context.getString(R.string.esty_url_static_part);
-        addQueryParam(QUERY_PARAM_API_KEY, context.getString(R.string.etsy_api_key));
+        addQueryParam(QUERY_PARAM_API_KEY, BuildConfig.ETSY_API_KEY);
         addQueryParam(QUERY_PARAM__INCLUDES, context.getString(R.string.etsy_url_main_image));
     }
 
@@ -107,7 +108,6 @@ public abstract class BaseApiAction<E extends Parcelable> implements Parcelable 
         }
         mOperationResult = getStringFromStream(is);
         print(TAG, mOperationResult);
-        Log.v("Loading Counts: ","New operation result fetched ");
     }
 
 
@@ -189,7 +189,6 @@ public abstract class BaseApiAction<E extends Parcelable> implements Parcelable 
 
     public abstract void doProcessingResult(Context context);
 
-    public abstract E getResultEntity();
 
     public abstract String getActionName();
 }

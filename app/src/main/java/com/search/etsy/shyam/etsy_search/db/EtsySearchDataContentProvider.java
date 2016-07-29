@@ -20,42 +20,30 @@ import com.search.etsy.shyam.etsy_search.network.action.SearchEstyListingsApiAct
 /**
  * Created by Shyam on 7/17/16.
  */
-public class EtsySearchDataContentProvider extends ContentProvider{
-
+public class EtsySearchDataContentProvider extends ContentProvider {
 
     public static final class SearchDataTable implements BaseColumns {
-
+        // Initializing the Table to store search data
         public static final String TABLE_NAME = "EtsySearchDataTable";
-
+        public static final String COLUMN_PAGE = "page";
         public static final String COLUMN_TITLE = "title";
-
         public static final String COLUMN_IMAGE_URL = "imageURL";
-
         public static final String COLUMN_PRICE = "price";
-
         public static final String COLUMN_CURRENCY = "currency";
-
-
     }
-    public static final String SEARCH_DATA_REQUEST =SearchDataTable._ID+"=?";
+    public static final String SEARCH_DATA_REQUEST =SearchDataTable.COLUMN_PAGE+"=?";
 
     private static final String DATABASE_NAME = "EtsySearchData";
-
     private static final int DATABASE_VERSION = 1;
-
-
     public static final int SEARCHDATA = 1;
-    public static final int SEARCHDATA_ID = 2;
-
     public static final String AUTHORITY = "com.searchetsy.data";
-
     public static final String URL = "content://" + AUTHORITY + "/" + SearchDataTable.TABLE_NAME;
-
     public static final Uri CONTENT_URI = Uri.parse(URL);
 
     private static final String CREATE_DB_SCRIPT =
             " CREATE TABLE " + SearchDataTable.TABLE_NAME +
                     " (" + SearchDataTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + SearchDataTable.COLUMN_PAGE + " REAL, "
                     + SearchDataTable.COLUMN_TITLE + " TEXT NOT NULL, "
                     + SearchDataTable.COLUMN_IMAGE_URL + " TEXT NOT NULL, "
                     + SearchDataTable.COLUMN_PRICE + " REAL, "
@@ -85,6 +73,7 @@ public class EtsySearchDataContentProvider extends ContentProvider{
             onCreate(db);
         }
     }
+
     private DatabaseHelper mDbHelper;
 
 
@@ -105,18 +94,19 @@ public class EtsySearchDataContentProvider extends ContentProvider{
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         switch (sUriMatcher.match(uri)) {
             case SEARCHDATA: {
-                cursor = db.query(SearchDataTable.TABLE_NAME, projection, selection, null, sortOrder, null, null);
+                cursor = db.query(SearchDataTable.TABLE_NAME, projection, selection, selectionArgs, sortOrder, null, null);
                 break;
             }
         }
         return cursor;
     }
+
     @Nullable
     @Override
     public String getType(Uri uri) {
         switch (sUriMatcher.match(uri)) {
             case SEARCHDATA:
-                return "vnd.android.cursor.dir/vnd.etsysearch.data";
+                return "vnd.android.cursor.dir/vnd.etsysearch.data"; //returing the MIME type
             default:
                 throw new IllegalArgumentException("Unsupported URI: " + uri);
         }
@@ -143,9 +133,7 @@ public class EtsySearchDataContentProvider extends ContentProvider{
     private Uri getUriForId(long id, Uri uri) {
         if (id > 0) {
             Uri itemUri = ContentUris.withAppendedId(uri, id);
-            getContext().
-                    getContentResolver().
-                    notifyChange(itemUri, null);
+            getContext().getContentResolver().notifyChange(itemUri, null);
             return itemUri;
         }
         return null;
@@ -164,7 +152,7 @@ public class EtsySearchDataContentProvider extends ContentProvider{
                 break;
             }
         }
-        if(id>0){
+        if (id > 0) {
             getContext().
                     getContentResolver().
                     notifyChange(uri, null);

@@ -28,7 +28,7 @@ public class EstySearchIntentService extends IntentService {
         super("EstySearchIntentService");
     }
 
-    public static Intent getApiActionIntent(Context context, BaseApiAction<?> action) {
+    public static Intent getApiActionIntent(Context context, BaseApiAction action) {
         Intent intent = new Intent(context, EstySearchIntentService.class);
         intent.setAction(ACTION);
         intent.putExtra(PARAM_API_ACTION_INSTANCE, (Parcelable) action);
@@ -40,26 +40,25 @@ public class EstySearchIntentService extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (action.equals(ACTION)) {
-                BaseApiAction apiAction = intent.getParcelableExtra(PARAM_API_ACTION_INSTANCE);
-                Intent resultIntent = new Intent(apiAction.getActionName());
-                resultIntent.putExtras(intent.getExtras());
+                BaseApiAction mApiAction = intent.getParcelableExtra(PARAM_API_ACTION_INSTANCE);
+                Intent mResultIntent = new Intent(mApiAction.getActionName());
+                mResultIntent.putExtras(intent.getExtras());
                 try {
-                    apiAction.doNetworkOperation();
+                    mApiAction.doNetworkOperation();
                 } catch (IOException e) {
                     Log.e(TAG, null, e);
-                    resultIntent.putExtra(PARAM_RESULT_CODE, ApiError.DEF_ERROR_CODE);
-                    resultIntent.putExtra(PARAM_RESULT_ENTITY, new ApiError(e.getMessage()));
+                    mResultIntent.putExtra(PARAM_RESULT_CODE, ApiError.DEF_ERROR_CODE);
+                    mResultIntent.putExtra(PARAM_RESULT_ENTITY, new ApiError(e.getMessage()));
                 }
-                apiAction.doProcessingResult(getApplicationContext());
-                resultIntent.putExtra(PARAM_RESULT_CODE, apiAction.getResultCode());
-                if (apiAction.getResultCode() == HttpURLConnection.HTTP_OK) {
-                    resultIntent.putExtra(PARAM_RESULT_ENTITY, apiAction.getResultEntity());
-                    resultIntent.putExtra(PARAM_RESULT_CODE, apiAction.getResultCode());
+                mApiAction.doProcessingResult(getApplicationContext());
+                mResultIntent.putExtra(PARAM_RESULT_CODE, mApiAction.getResultCode());
+                if (mApiAction.getResultCode() == HttpURLConnection.HTTP_OK) {
+                    mResultIntent.putExtra(PARAM_RESULT_CODE, mApiAction.getResultCode());
                 } else {
-                    resultIntent.putExtra(PARAM_RESULT_ENTITY, apiAction.getError());
-                    resultIntent.putExtra(PARAM_RESULT_CODE, apiAction.getResultCode());
+                    mResultIntent.putExtra(PARAM_RESULT_ENTITY, mApiAction.getError());
+                    mResultIntent.putExtra(PARAM_RESULT_CODE, mApiAction.getResultCode());
                 }
-                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(resultIntent);
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(mResultIntent);
             }
         }
     }

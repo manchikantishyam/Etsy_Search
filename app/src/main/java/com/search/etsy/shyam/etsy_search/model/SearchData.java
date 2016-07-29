@@ -17,7 +17,6 @@ public class SearchData implements Parcelable {
 
     }
 
-
     protected SearchData(Parcel in) {
         mId = in.readInt();
         mTitle = in.readString();

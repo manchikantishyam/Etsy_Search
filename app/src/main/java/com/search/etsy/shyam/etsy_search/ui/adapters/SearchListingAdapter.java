@@ -23,13 +23,13 @@ public class SearchListingAdapter extends RecyclerView.Adapter<SearchListingAdap
     Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, price;
+        public TextView mTitle, mPrice;
         public ImageView image;
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.item_title);
-            price = (TextView) view.findViewById(R.id.item_price);
+            mTitle = (TextView) view.findViewById(R.id.item_title);
+            mPrice = (TextView) view.findViewById(R.id.item_price);
             image = (ImageView) view.findViewById(R.id.item_image);
         }
     }
@@ -45,20 +45,20 @@ public class SearchListingAdapter extends RecyclerView.Adapter<SearchListingAdap
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        View mItemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.search_item_card, parent, false);
-        return new MyViewHolder(itemView);
+        return new MyViewHolder(mItemView);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder mHolder, int position) {
         SearchData mSearchData = mSearchDataList.get(position);
-        holder.title.setText(mSearchData.getTitle());
-        holder.price.setText(mSearchData.getCurrencyType()+"  "
-        + String.valueOf(mSearchData.getPrice()));
+        mHolder.mTitle.setText(mSearchData.getTitle());
+        mHolder.mPrice.setText(mSearchData.getCurrencyType() + "  "
+                + String.valueOf(mSearchData.getPrice()));
         Picasso.with(mContext)
                 .load(mSearchData.getImageURL())
-                .into(holder.image);
+                .into(mHolder.image);
     }
 
     @Override
